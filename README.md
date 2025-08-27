@@ -1,4 +1,4 @@
-# Training Piscine Data Science - Module 3: "The Present"
+# Training Piscine Data Science - Module 3:
 
 ## Project Overview
 
