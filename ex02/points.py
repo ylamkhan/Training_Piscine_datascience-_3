@@ -1,63 +1,71 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# Load datasets
-train_df = pd.read_csv('../Train_knight.csv')
-test_df = pd.read_csv('../Test_knight.csv')
+# -----------------------------#
+#     Train_knight.csv         #
+# -----------------------------#
 
-# Choose two features for plotting (you can change them)
-x_feature = 'Empowered'
-y_feature = 'Stims'
+def Train_knight(path_file):
+    try:
+        df = pd.read_csv(path_file)
+        sith = df[df['knight'] == 'Sith']
+        jedi = df[df['knight'] == 'Jedi']
+        def plot_scatter(ax, x, y, title):
+            ax.scatter(jedi[x], jedi[y], color='blue', label='Jedi', alpha=0.7)
+            ax.scatter(sith[x], sith[y], color='red', label='Sith', alpha=0.7)
+            ax.set_xlabel(x)
+            ax.set_ylabel(y)
+            ax.set_title(title)
+            ax.legend(loc="upper left")
+            ax.grid(True, linestyle="--", alpha=0.6)
+        fig, axes = plt.subplots(1, 2, figsize=(14, 6))
+        plot_scatter(axes[0], "Empowered", "Stims", "Separated (Empowered vs Stims)")
+        plot_scatter(axes[1], "Deflection", "Push", "Mixed (Deflection vs Push)")
+        plt.suptitle("Jedi vs Sith Attribute Comparison", fontsize=14, fontweight="bold")
+        plt.tight_layout()
+        plt.show()
+    except Exception as e:
+        print(f"Error {e}")
 
-# Define colors for knights
-colors = {'Sith': 'red', 'Jedi': 'blue'}
 
-# --------- Train graphs ---------
-plt.figure(figsize=(12, 5))
 
-# Graph 1: Train with clusters (colored by knight)
-plt.subplot(1, 2, 1)
-for knight in train_df['knight'].unique():
-    subset = train_df[train_df['knight'] == knight]
-    plt.scatter(subset[x_feature], subset[y_feature], label=knight, color=colors[knight], alpha=0.7)
-plt.title('Train - Knights separated')
-plt.xlabel(x_feature)
-plt.ylabel(y_feature)
-plt.legend()
 
-# Graph 2: Train mixed (all points same color)
-plt.subplot(1, 2, 2)
-plt.scatter(train_df[x_feature], train_df[y_feature], color='grey', alpha=0.7)
-plt.title('Train - Knights mixed')
-plt.xlabel(x_feature)
-plt.ylabel(y_feature)
+# -----------------------------#
+#     Test_knight.csv         #
+# -----------------------------#
 
-plt.tight_layout()
-plt.show()
+def Test_knight(path_file):
+    try:
+        df_test = pd.read_csv(path_file)
+        def plot_scatter(ax, x, y, title, color="green"):
+            ax.scatter(
+                df_test[x], df_test[y],
+                color=color, label='knights', alpha=0.6, edgecolors="k"
+            )
+            ax.set_xlabel(x)
+            ax.set_ylabel(y)
+            ax.set_title(title)
+            ax.legend(loc="upper left")
+            ax.grid(True, linestyle="--", alpha=0.6)
+        fig, axes = plt.subplots(1, 2, figsize=(14, 6))
+        plot_scatter(axes[0], "Empowered", "Stims", "Test Set - Separated (Empowered vs Stims)")
+        plot_scatter(axes[1], "Deflection", "Push", "Test Set - Mixed (Deflection vs Push)")
+        plt.suptitle("Test Dataset Attribute Distribution", fontsize=14, fontweight="bold")
+        plt.tight_layout()
+        plt.show()
+    except Exception as s:
+        print(f"Error {e}")
 
-# --------- Test graphs ---------
-plt.figure(figsize=(12, 5))
 
-# Graph 3: Test - colored by knight if exists, otherwise all same color
-plt.subplot(1, 2, 1)
-if 'knight' in test_df.columns:
-    colors = {'Sith': 'red', 'Jedi': 'blue'}
-    for knight in test_df['knight'].unique():
-        subset = test_df[test_df['knight'] == knight]
-        plt.scatter(subset[x_feature], subset[y_feature], label=knight, color=colors[knight], alpha=0.7)
-    plt.legend()
-else:
-    plt.scatter(test_df[x_feature], test_df[y_feature], color='grey', alpha=0.7)
-plt.title('Test - Knights separated (or single cluster)')
-plt.xlabel(x_feature)
-plt.ylabel(y_feature)
+def main():
+    Train_knight("../Train_knight.csv")
+    Test_knight("../Test_knight.csv")
 
-# Graph 4: Test mixed
-plt.subplot(1, 2, 2)
-plt.scatter(test_df[x_feature], test_df[y_feature], color='grey', alpha=0.7)
-plt.title('Test - Knights mixed')
-plt.xlabel(x_feature)
-plt.ylabel(y_feature)
 
-plt.tight_layout()
-plt.show()
+
+if __name__ == "__main__":
+    main()
+
+        
+
+
