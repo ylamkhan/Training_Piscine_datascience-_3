@@ -22,9 +22,6 @@ def split():
         train_df, val_df = train_test_split(df, test_size=0.2, random_state=42, shuffle=True)
         train_df.to_csv("Training_knight.csv", index=False)
         val_df.to_csv("Validation_knight.csv", index=False)
-        # print(f"Original dataset size: {len(df)}")
-        # print(f"Training set size: {len(train_df)} ({len(train_df)/len(df)*100:.1f}%)")
-        # print(f"Validation set size: {len(val_df)} ({len(val_df)/len(df)*100:.1f}%)")
     except Exception as e:
         print(f"Error {e}")
 

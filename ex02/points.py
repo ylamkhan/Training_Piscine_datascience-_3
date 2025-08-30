@@ -1,6 +1,9 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
+
+
+
 # -----------------------------#
 #     Train_knight.csv         #
 # -----------------------------#
@@ -16,8 +19,11 @@ def Train_knight(path_file):
             ax.set_xlabel(x)
             ax.set_ylabel(y)
             ax.set_title(title)
-            ax.legend(loc="upper left")
-            ax.grid(True, linestyle="--", alpha=0.6)
+            if x == "Empowered":
+                ax.legend(loc="upper left")
+            else:
+                ax.legend(loc="upper right") 
+            ax.grid(False)
         fig, axes = plt.subplots(1, 2, figsize=(14, 6))
         plot_scatter(axes[0], "Empowered", "Stims", "Separated (Empowered vs Stims)")
         plot_scatter(axes[1], "Deflection", "Push", "Mixed (Deflection vs Push)")
@@ -45,8 +51,11 @@ def Test_knight(path_file):
             ax.set_xlabel(x)
             ax.set_ylabel(y)
             ax.set_title(title)
-            ax.legend(loc="upper left")
-            ax.grid(True, linestyle="--", alpha=0.6)
+            if x == "Empowered":
+                ax.legend(loc="upper left")
+            else:
+                ax.legend(loc="upper right")
+            ax.grid(False)
         fig, axes = plt.subplots(1, 2, figsize=(14, 6))
         plot_scatter(axes[0], "Empowered", "Stims", "Test Set - Separated (Empowered vs Stims)")
         plot_scatter(axes[1], "Deflection", "Push", "Test Set - Mixed (Deflection vs Push)")

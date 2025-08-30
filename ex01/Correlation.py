@@ -4,6 +4,32 @@ import pandas as pd
 #      Train_knight.csv        #
 # -----------------------------#
 
+#---------------------------------------------#
+#                                             #
+#                    cov(X,Y)​                 #
+#               r = ----------                #
+#                    σx . σy                  #
+# Where:                                      #
+#   . cov(X,Y) = covariance between X and Y​   #
+#   . σx = standard deviation of X            #
+#   . σy = standard deviation of Y            #
+#---------------------------------------------#
+
+
+#---------------------------------------------#
+#                                             #
+#                                             #
+#     cov(X,Y) = 1/n .( ∑ ​(xi​− 'x)(yi​− 'y​))   #
+#                                             #
+#     σx  = 1/n . (∑ ​(xi​− 'x)^1/2)            #
+#                                             #
+# where:                                      #
+#      'x = 1 / n . (∑ ​xi)​                    #
+#---------------------------------------------#
+
+
+
+
 def main(path_file):
     try:    
         df = pd.read_csv(path_file)
@@ -17,7 +43,6 @@ def main(path_file):
         print(corr_df)
     except Exception as e:
         print(f"ERROR {e}")
-
 
 if __name__ == "__main__":
     main("../Train_knight.csv")
